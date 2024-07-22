@@ -1,0 +1,1 @@
+<img src="./img/bg.png" width="100%" alt="bg">

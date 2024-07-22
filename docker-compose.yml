@@ -1,0 +1,18 @@
+name: redis-guide
+networks:
+    redis_guide_network:
+        driver: bridge
+services:
+    redis:
+        container_name: redis-guide
+        image: redis:alpine
+        restart: unless-stopped
+        ports:
+            - '63780:6379'
+        volumes:
+            - redis_guide_db:/data
+        command: redis-server --save 20 1 --loglevel warning
+        networks:
+            - redis_guide_network
+volumes:
+    redis_guide_db:
