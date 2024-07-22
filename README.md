@@ -16,6 +16,24 @@
 
 #### II. Basic Command
 
+| Command | Description                  |
+|---------|------------------------------|
+| SET     | Add key and value            |
+| MSET    | Add multiple keys and values |
+| GET     | Get value by key             |
+| MGET    | Get multi values by keys     |
+| STRLEN  | Get value size of key        |
+| KEYS    | Get keys by pattern          |
+| EXISTS  | Check key exist or not       |
+| INCR    | Increase the number by 1     |
+| INCRBY  | Increase the number by n     |
+| DECR    | Decrease the number by 1     |
+| DECRBY  | Decrease the number by n     |
+
+<details>
+
+<summary><strong>Example</strong></summary>
+
 **Set value**
 ```shell
 127.0.0.1:6379> SET name harry
@@ -101,3 +119,7 @@ OK
 127.0.0.1:6379> SET year 2025 NX
 (nil)
 ```
+
+</details>
+
+### Redis Hash
