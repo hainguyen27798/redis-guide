@@ -93,6 +93,7 @@ OK
 |-----------|-------------|
 | EX        | second      |
 | PX        | millisecond |
+
 **Set key if it is not existed**
 ```shell
 127.0.0.1:6379> SET year 2024 NX
