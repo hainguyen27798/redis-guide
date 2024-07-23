@@ -4,6 +4,10 @@
     Redis Guide
 </h3>
 
+### Redis Overview
+
+<div><img style="max-width: 800px; width: 100%" src="img/redis-explained.jpg" alt="hash"/></div><br/>
+
 ### Redis Basic
 
 #### I. Summary:
@@ -24,19 +28,20 @@ additional functionality that lets you implement counters and perform bitwise op
 
 #### III. Basic Command:
 
-| Command | Description                  |
-|---------|------------------------------|
-| SET     | Add key and value            |
-| MSET    | Add multiple keys and values |
-| GET     | Get value by key             |
-| MGET    | Get multi values by keys     |
-| STRLEN  | Get value size of key        |
-| KEYS    | Get keys by pattern          |
-| EXISTS  | Check key exist or not       |
-| INCR    | Increase the number by 1     |
-| INCRBY  | Increase the number by n     |
-| DECR    | Decrease the number by 1     |
-| DECRBY  | Decrease the number by n     |
+| Command  | Description                  |
+|----------|------------------------------|
+| SET      | Add key and value            |
+| MSET     | Add multiple keys and values |
+| GET      | Get value by key             |
+| MGET     | Get multi values by keys     |
+| STRLEN   | Get value size of key        |
+| KEYS     | Get keys by pattern          |
+| EXISTS   | Check key exist or not       |
+| INCR     | Increase the number by 1     |
+| INCRBY   | Increase the number by n     |
+| DECR     | Decrease the number by 1     |
+| DECRBY   | Decrease the number by n     |
+| FLUSHALL | Delete everything            |
 
 <details>
 
