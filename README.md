@@ -12,7 +12,7 @@
 
 <div><img style="max-width: 400px" src="img/string.png" alt="hash"/></div><br/>
 
-#### I. Basic Data types:
+#### II. Basic Data types:
 
 | String type    | size        |
 |----------------|-------------|
@@ -20,7 +20,7 @@
 | **_raw_**      | \> 44 bytes |
 | _**int**_      | integer     |
 
-#### II. Basic Command:
+#### III. Basic Command:
 
 | Command | Description                  |
 |---------|------------------------------|
