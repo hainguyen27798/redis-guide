@@ -6,6 +6,12 @@
 
 ### Redis Basic
 
+#### I. Summary:
+
+**_Redis strings_** store sequences of bytes, including text, serialized objects, and binary arrays. As such, strings are the simplest type of value you can associate with a Redis key. They're often used for caching, but they support additional functionality that lets you implement counters and perform bitwise operations, too.
+
+<div><img style="max-width: 400px" src="img/string.png" alt="hash"/></div><br/>
+
 #### I. Basic Data types:
 
 | String type    | size        |
