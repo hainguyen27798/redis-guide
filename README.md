@@ -6,7 +6,7 @@
 
 ### Redis Basic
 
-#### I. String
+#### I. Basic Data types:
 
 | String type    | size        |
 |----------------|-------------|
@@ -14,7 +14,7 @@
 | **_raw_**      | \> 44 bytes |
 | _**int**_      | integer     |
 
-#### II. Basic Command
+#### II. Basic Command:
 
 | Command | Description                  |
 |---------|------------------------------|
@@ -123,3 +123,79 @@ OK
 </details>
 
 ### Redis Hash
+
+#### I. Summary:
+
+**_Redis hashes_** are record types structured as collections of field-value pairs. You can use hashes to represent basic objects and to store groupings of counters, among other things.
+
+<div><img style="max-width: 400px" src="img/hash.png" alt="hash"/></div>
+
+**List command:**
+
+| Command | Description                            |
+|---------|----------------------------------------|
+| HSET    | Add a hash                             |
+| HGET    | Get value by single field              |
+| HMGET   | Get values by multi keys               |
+| HDEL    | Delete field in a hash                 |
+| HLEN    | Get number of keys in hash             |
+| HGETALL | Get all pair key-value in hash         |
+| HKEYS   | Get all keys in hash                   |
+| HEXISTS | Check key exist or not in hash         |
+| HINCRBY | Increase the field number in hash by n |
+
+<details>
+
+<summary><strong>Example</strong></summary>
+
+**HSET**
+```shell
+127.0.0.1:6379> HSET user:001 name harry age 26
+(integer) 1
+```
+**HGET**
+```shell
+127.0.0.1:6379> HGET user:001 name
+"harry"
+```
+**HMGET**
+```shell
+127.0.0.1:6379> HMGET user:001 name age
+1) "harry"
+2) "26"
+```
+**HDEL**
+```shell
+127.0.0.1:6379> HDEL user:001 age
+(integer) 1
+```
+**HGETALL**
+```shell
+127.0.0.1:6379> HGETALL user:002
+1) "name"
+2) "hai"
+3) "age"
+4) "26"
+```
+**HKEYS**
+```shell
+127.0.0.1:6379> HKEYS user:002
+1) "name"
+2) "age"
+```
+**HEXISTS**
+```shell
+127.0.0.1:6379> HEXISTS user:002 age
+(integer) 1
+127.0.0.1:6379> HEXISTS user:002 age1
+(integer) 0
+```
+**HINCRBY**
+```shell
+127.0.0.1:6379> HINCRBY user:002 age 1
+(integer) 27
+127.0.0.1:6379> HINCRBY user:002 age -1
+(integer) 26
+```
+
+</details>
