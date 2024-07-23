@@ -6,7 +6,9 @@
 
 ### Redis Overview
 
-<div><img style="max-width: 800px; width: 100%" src="img/redis-explained.jpg" alt="hash"/></div><br/>
+<br/><div><img style="max-width: 800px; width: 100%" src="img/redis-explained.jpg" alt="hash"/></div><br/>
+
+Read more about redis. Please check [link](https://architecturenotes.co/p/redis)
 
 ### Redis Basic
 
