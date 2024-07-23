@@ -415,7 +415,6 @@ OK
 4) "20"
 5) "5"
 6) "3"
-127.0.0.1:6379> 
 ```
 
 </details>
@@ -426,3 +425,172 @@ OK
 *_BLPOP_**) to wait for new notifications.
 
 <div><img style="max-width: 800px; width: 100%" src="img/blpop.gif" alt="hash"/></div>
+
+### Redis Set
+
+#### I. Summary:
+
+**_A Redis set_** is an unordered collection of unique strings (members). You can use Redis sets to efficiently:
+
+- Track unique items (e.g., track all unique IP addresses accessing a given blog post).
+- Represent relations (e.g., the set of all users with a given role).
+- Perform common set operations such as intersection, unions, and differences.
+
+<div><img style="max-width: 400px" src="img/set.png" alt="hash"/></div>
+
+**List command:**
+
+| Command     | Description                              |
+|-------------|------------------------------------------|
+| SADD        | Add a items to set                       |
+| SMEMBERS    | Get all item in the set                  |
+| SISMEMBER   | Check if the item already exists or not  |
+| SCARD       | Get number of items of the set           |
+| SREM        | Delete by item                           |
+| SPOP        | Delete the random items                  |
+| SRANDMEMBER | Get the random items                     |
+| SMOVE       | Move a items from the set to another set |
+
+<details>
+
+<summary><strong>Example</strong></summary>
+
+**Add items**
+
+```shell
+127.0.0.1:6379> SADD notis noti1 noti2
+(integer) 2
+127.0.0.1:6379> SADD notis noti3
+(integer) 1
+```
+
+```shell
+127.0.0.1:6379> SADD notis noti3
+(integer) 0
+```
+
+Adding `noti3` to `notis` failed because `noti3` already exists
+
+**Get all items**
+
+```shell
+127.0.0.1:6379> SMEMBERS notis
+1) "noti1"
+2) "noti2"
+3) "noti3"
+```
+
+**Check if the item already exists or not**
+
+```shell
+127.0.0.1:6379> SISMEMBER notis noti3
+(integer) 1
+127.0.0.1:6379> SISMEMBER notis noti4
+(integer) 0
+```
+
+**Check if the item already exists or not**
+
+```shell
+127.0.0.1:6379> SCARD notis
+(integer) 3
+```
+
+**Get random items**
+
+```shell
+127.0.0.1:6379> SRANDMEMBER notis
+"noti3"
+127.0.0.1:6379> SRANDMEMBER notis 2
+1) "noti2"
+2) "noti3"
+```
+
+**Move `noti1` from `notis` to `notis:1`**
+
+```shell
+127.0.0.1:6379> SMOVE notis notis:1 noti1
+(integer) 1
+127.0.0.1:6379> SMEMBERS notis:1
+1) "noti1"
+127.0.0.1:6379> SMEMBERS notis
+1) "noti2"
+2) "noti3" 
+```
+
+</details>
+
+#### II. Scenario Used:
+
+**Scenario 1:** friends.
+
+<div><img style="max-width: 400px; width: 100%" src="img/friends.png" alt="hash"/></div>
+
+Get mutual friends:
+
+```shell
+127.0.0.1:6379> SINTER hai:fr harry:fr
+1) "an"
+2) "khan"
+3) "tony"
+```
+
+Get hai's other friends:
+
+```shell
+127.0.0.1:6379> SDIFF hai:fr harry:fr
+1) "tina"
+2) "mask"
+```
+
+**Scenario 2:** Spin the wheel of fortune.
+
+```shell
+127.0.0.1:6379> SADD wheel m10 cr7 mbappe kaka bale zidane benzema
+(integer) 7
+127.0.0.1:6379> SMEMBERS wheel
+1) "m10"
+2) "cr7"
+3) "mbappe"
+4) "kaka"
+5) "bale"
+6) "zidane"
+7) "benzema"
+```
+
+Person who wins the special prize
+
+```shell
+127.0.0.1:6379> SPOP wheel
+"cr7"
+```
+
+Remaining members
+
+```shell
+127.0.0.1:6379> SMEMBERS wheel
+1) "m10"
+2) "mbappe"
+3) "kaka"
+4) "bale"
+5) "zidane"
+6) "benzema"
+```
+
+3 consolation prizes
+
+```shell
+127.0.0.1:6379> SRANDMEMBER wheel 3
+1) "mbappe"
+2) "zidane"
+3) "benzema"
+```
+
+_or_
+
+```shell
+127.0.0.1:6379> SPOP wheel 3
+1) "m10"
+2) "kaka"
+3) "bale"
+```
