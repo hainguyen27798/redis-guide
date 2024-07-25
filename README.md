@@ -594,3 +594,119 @@ _or_
 2) "kaka"
 3) "bale"
 ```
+
+### Redis ZSet
+
+#### I. Summary:
+
+A Redis sorted set is a collection of unique strings (members) ordered by an associated score. When more than one string
+has the same score, the strings are ordered lexicographically. Some use cases for sorted sets include:
+
+- Leaderboards. For example, you can use sorted sets to easily maintain ordered lists of the highest scores in a massive
+  online game.
+- Rate limiters. In particular, you can use a sorted set to build a sliding-window rate limiter to prevent excessive API
+  requests.
+
+You can think of sorted sets as a mix between a Set and a Hash. Like sets, sorted sets are composed of unique,
+non-repeating string elements, so in some sense a sorted set is a set as well.
+
+<div><img style="max-width: 250px" src="img/zset.png" alt="hash"/></div>
+
+**List command:**
+
+| Command       | Description                                  |
+|---------------|----------------------------------------------|
+| ZADD          | Add a items to zset                          |
+| ZSCORE        | Get item's score                             |
+| ZRANGE        | Get items and sort by asc                    |
+| ZREVRANGE     | Get items and sort by desc                   |
+| ZREM          | Delete by item                               |
+| ZCARD         | Get number of items of the zset              |
+| ZINCRBY       | Increase score                               |
+| ZRANGEBYSCORE | List item with scores within a special range |
+
+<details>
+
+<summary><strong>Example</strong></summary>
+
+**Add items**
+
+```shell
+127.0.0.1:6379> ZADD score:2024 50 an 74 harry 46 peter 92 thor
+(integer) 4
+127.0.0.1:6379> ZADD score:2024 60 tom
+(integer) 1
+```
+
+**Show items and sort by asc**
+
+```shell
+127.0.0.1:6379> ZRANGE score:2024 0 -1
+1) "peter"
+2) "an"
+3) "tom"
+4) "harry"
+5) "thor"
+```
+
+**Show items and sort by desc**
+
+```shell
+127.0.0.1:6379> ZREVRANGE score:2024 0 -1
+1) "thor"
+2) "harry"
+3) "tom"
+3) "peter"
+4) "an"
+```
+
+**Get Harry's score**
+
+```shell
+127.0.0.1:6379> ZSCORE score:2024 harry
+"74"
+```
+
+**Delete item**
+
+```shell
+127.0.0.1:6379> ZREM score:2024 peter
+(integer) 1
+```
+
+**Count number of items**
+
+```shell
+127.0.0.1:6379> ZCARD score:2024
+(integer) 4
+```
+
+**Increase Tom's score by 4**
+
+```shell
+127.0.0.1:6379> ZINCRBY score:2024 4 tom
+"64"
+```
+
+**List items with scores from 75 to 90**
+
+```shell
+127.0.0.1:6379> ZRANGEBYSCORE score:2024 50 90
+1) "an"
+2) "tom"
+3) "harry"
+```
+
+**List top 3 items with scores**
+
+```shell
+127.0.0.1:6379> ZREVRANGE score:2024 0 2 WITHSCORES
+1) "thor"
+2) "92"
+3) "harry"
+4) "74"
+5) "tom"
+6) "64"
+```
+
+</details>
