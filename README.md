@@ -710,3 +710,11 @@ non-repeating string elements, so in some sense a sorted set is a set as well.
 ```
 
 </details>
+
+### Redis Transaction
+
+[_Coming soon..._]
+
+### Redis Pub/Sub
+
+<div><img style="max-width: 800px; width: 100%" src="img/pub-sub.gif" alt="hash"/></div>
